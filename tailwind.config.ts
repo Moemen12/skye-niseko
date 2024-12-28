@@ -21,6 +21,7 @@ const config: Config = {
       },
       screens: {
         nano: "0px",
+        xs: "250px",
       },
     },
   },

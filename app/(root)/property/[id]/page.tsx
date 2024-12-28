@@ -50,7 +50,7 @@ const Property: NextPage = (): JSX.Element => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid nano:grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-gray-50 p-4 rounded-lg text-center">
               <Users className="w-6 h-6 mx-auto mb-2 text-[#b45e30]" />
               <p className="text-sm text-gray-600">Standard Capacity</p>
@@ -75,7 +75,7 @@ const Property: NextPage = (): JSX.Element => {
 
           <div className="bg-gray-50 nano:p-0 sm:p-6 rounded-xl">
             <h3 className="text-xl font-semibold mb-4">Amenities</h3>
-            <div className="grid nano:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid nano:grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
               {Object.entries(property.amenities).map(([key, value]) => (
                 <div
                   key={key}
