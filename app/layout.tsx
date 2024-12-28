@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "../globals.css";
+import "../app/globals.css";
 import React from "react";
 import Header from "@/components/shared/Header";
 import Image from "next/image";
-import coloredLine from "../../public/assets/images/colored-line.gif";
+import coloredLine from "@/public/assets/images/colored-line.gif";
 import Footer from "@/components/shared/Footer";
 
 export const metadata: Metadata = {
@@ -18,20 +18,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-screen flex flex-col">
         <div className="flex-none">
           <Image
             className="h-1 w-full"
             src={coloredLine}
             alt={"colored line"}
           />
-
           <Header />
         </div>
-        <main>{children}</main>
-        <div className="flex-none">
-          <Footer />
-        </div>
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );

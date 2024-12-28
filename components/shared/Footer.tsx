@@ -54,7 +54,13 @@ const Footer: React.FC = (): JSX.Element => {
                   className="cursor-pointer hover:text-[#b45e30] text-[#666666]"
                   key={id}
                 >
-                  <Image src={icon} alt={alt} width={18} height={18} />
+                  <Image
+                    src={icon}
+                    alt={alt}
+                    width={18}
+                    height={18}
+                    style={{ width: "18px", height: "18px" }} // Fixed size
+                  />
                 </div>
               ))}
             </div>
@@ -76,8 +82,9 @@ const Footer: React.FC = (): JSX.Element => {
               src="/assets/images/skye-niseko-logo.svg"
               width={120}
               height={74}
-              alt="skye-niseko-logo"
-              className="mb-4"
+              alt="Skye Niseko Logo"
+              className="mb-4 w-24 md:w-32 lg:w-40"
+              priority
             />
             <div className="space-y-4">
               <p>

@@ -1,56 +1,48 @@
 "use client";
 import { NextPage } from "next";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import React, { JSX } from "react";
 import { PROPERTIES } from "@/constants";
 import Image from "next/image";
-import { ArrowLeft, Bath, Home, Users } from "lucide-react";
+import { Bath, Home, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Property as PropertyType } from "@/types";
+import { NotFound } from "@/components/shared/NotFound";
 
 const Property: NextPage = (): JSX.Element => {
-  const { id } = useParams<{ id: string }>();
-  const router = useRouter();
+  const params = useParams<{ id: string }>();
 
-  const property = PROPERTIES.find((p) => p.id.toString() === id);
+  const id = params.id as string;
+
+  const property = PROPERTIES.find((p: PropertyType) => p.id.toString() === id);
 
   if (!property) {
     return (
-      <div className="min-h-[50vh] container mx-auto p-4 flex flex-col items-center justify-center">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold text-[#b45e30]">
-            Property Not Found
-          </h1>
-          <p className="text-gray-600">
-            Sorry, we couldn&apos;t find the property you&apos;re looking for.
-          </p>
-          <Button
-            onClick={() => router.push("/")}
-            className="transition-colors bg-[#b45e30] text-white hover:bg-[#b45e30]"
-          >
-            <ArrowLeft size={20} />
-            Return Home
-          </Button>
-        </div>
-      </div>
+      <NotFound
+        title="Property Not Found"
+        message="Sorry, we couldn't find the property you're looking for."
+      />
     );
   }
 
   return (
-    <div className="mx-auto px-4 py-8">
+    <div className="mx-auto px-4 py-8 pt-0 max-w-6xl lg:mx-auto ">
       <div className="grid lg:grid-cols-2 gap-8">
         <div className="relative h-[300px] md:h-[500px] w-full rounded-xl overflow-hidden">
           <Image
             src={property.images[0]}
             alt={property.name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
             priority
+            quality={100}
           />
         </div>
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            <h1 className="nano:text-xl text-3xl md:text-4xl font-bold mb-4">
               {property.name}
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed">
@@ -58,7 +50,7 @@ const Property: NextPage = (): JSX.Element => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-gray-50 p-4 rounded-lg text-center">
               <Users className="w-6 h-6 mx-auto mb-2 text-[#b45e30]" />
               <p className="text-sm text-gray-600">Standard Capacity</p>
@@ -81,9 +73,9 @@ const Property: NextPage = (): JSX.Element => {
             </div>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-xl">
+          <div className="bg-gray-50 nano:p-0 sm:p-6 rounded-xl">
             <h3 className="text-xl font-semibold mb-4">Amenities</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid nano:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {Object.entries(property.amenities).map(([key, value]) => (
                 <div
                   key={key}
@@ -103,7 +95,7 @@ const Property: NextPage = (): JSX.Element => {
           </div>
 
           <div className="pt-6">
-            <Button className="transition-colors text-lg bg-[#b45e30] font-semibold w-full py-8">
+            <Button className="transition-colors text-lg bg-[#b45e30] nano:px-2 nano:py-2 sm:py-6 nano:w-fit font-semibold sm:w-full py-8">
               Book Now
             </Button>
           </div>
