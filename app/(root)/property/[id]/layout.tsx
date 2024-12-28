@@ -1,16 +1,13 @@
 import { Metadata } from "next";
-import React from "react";
+import React, { JSX } from "react";
 import { PROPERTIES } from "@/constants";
-import { notFound } from "next/navigation";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
-
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { id } = params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
 
   const property = PROPERTIES.find((p) => p.id.toString() === id);
 
@@ -22,23 +19,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 
   return {
-    title: property.name,
+    title: `${property.name}`,
     description: property.description,
   };
 }
 
 export default function PropertyLayout({
   children,
-  params,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-  params: { id: string };
-}) {
-  const property = PROPERTIES.find((p) => p.id.toString() === params.id);
-
-  if (!property) {
-    notFound();
-  }
-
+}>): JSX.Element {
   return <>{children}</>;
 }
