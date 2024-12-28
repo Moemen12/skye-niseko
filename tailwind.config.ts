@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
-export default {
+const config: Config = {
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,7 +14,17 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      screens: {
+        nano: "0px",
+      },
     },
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [tailwindcssAnimate],
+};
+
+export default config;
