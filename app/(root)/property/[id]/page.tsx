@@ -75,7 +75,7 @@ const Property: NextPage = (): JSX.Element => {
 
           <div className="bg-gray-50 nano:p-0 sm:p-6 rounded-xl">
             <h3 className="text-xl font-semibold mb-4">Amenities</h3>
-            <div className="grid nano:grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid nano:grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 nano:pl-8 py-6">
               {Object.entries(property.amenities).map(([key, value]) => (
                 <div
                   key={key}
